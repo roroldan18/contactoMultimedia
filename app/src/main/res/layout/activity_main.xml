@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Nombre y apellidos"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/nombreEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutNombre"
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutNacimiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintTop_toBottomOf="@id/nombreEdit"
+        android:text="Fecha de nacimiento"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/datePicker"
+        android:hint="@string/planned_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintTop_toBottomOf="@id/layoutNacimiento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="date"
+        android:focusable="false"
+        android:clickable="true"
+        android:maxLines="1" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutDNI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePicker"
+        android:text="DNI"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/dniEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutDNI"
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="MissingConstraints" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutSex"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dniEdit"
+        android:text="Sexo"
+        tools:ignore="MissingConstraints" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/layoutSex"
+        tools:ignore="MissingConstraints">
+        <RadioButton
+            android:id="@+id/radioHombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hombre"
+            android:checked="true"
+            tools:ignore="MissingConstraints" />
+        <RadioButton
+            android:id="@+id/radioMujer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mujer"
+            tools:ignore="MissingConstraints" />
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        android:text="Email"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:id="@+id/emailEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutEmail"
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="MissingConstraints"
+        android:inputType="textEmailAddress"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/layoutProfesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEdit"
+        android:text="Profesión"
+        tools:ignore="MissingConstraints" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:entries="@array/professions"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutProfesion"
+        tools:ignore="MissingConstraints"
+        />
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/terminosCheck"
+        android:text="Acepto las comunicaciones comerciales"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner"
+        tools:ignore="MissingConstraints"
+        />
+    <Button
+        android:id="@+id/botonEnviar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/botonRecuperar"
+        app:layout_constraintTop_toBottomOf="@id/terminosCheck"
+        tools:ignore="MissingConstraints"
+        />
+    <Button
+        android:id="@+id/botonRecuperar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Recuperar"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintStart_toEndOf="@id/botonEnviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/terminosCheck"
+        tools:ignore="MissingConstraints"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

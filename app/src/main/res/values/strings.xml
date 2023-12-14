@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ConstraintLayout</string>
+    <string-array name="professions">
+        <item>Contador</item>
+        <item>Administrativo</item>
+        <item>Informático</item>
+        <item>Abogado</item>
+        <item>Médico</item>
+    </string-array>
+    <string name="planned_date">15/10/1991</string>
+</resources>
