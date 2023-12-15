@@ -96,6 +96,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        fun cleanFields(){
+            nombreApellido.text.clear()
+            dni.text.clear()
+            sexo.clearCheck()
+            fecha_nacimiento.text.clear()
+            correo.text.clear()
+            profesion.setSelection(0)
+            acepta_terminos.isChecked = false
+        }
+
+
 
 
         // Guardar los datos del formulario
@@ -137,8 +148,40 @@ class MainActivity : AppCompatActivity() {
             )
 
             contactoDBHelper.saveContact(contacto)
+
+            // Luego de guardar limpia todos los campos.
+            cleanFields()
         }
 
+
+        // Vuelve a completar los fields con los datos del último contacto guardado.
+        recuperar.setOnClickListener{
+            val contactos = contactoDBHelper.getContactos()
+            val ultimoContacto = contactos.lastOrNull()
+
+            if (ultimoContacto != null) {
+                nombreApellido.setText(ultimoContacto.nombre + " " + ultimoContacto.apellidos)
+                dni.setText(ultimoContacto.dni)
+                if (ultimoContacto.sexo == "Hombre") {
+                    sexo.check(R.id.radioHombre)
+                } else {
+                    sexo.check(R.id.radioMujer)
+                }
+                fecha_nacimiento.setText(ultimoContacto.fecha_nacimiento)
+                correo.setText(ultimoContacto.correo)
+
+                // Encontrar la posición del elemento en el array de profesiones
+                val profesionesArray = resources.getStringArray(R.array.professions)
+                val posicionProfesion = profesionesArray.indexOf(ultimoContacto.profesion)
+
+                // Establecer la selección en el Spinner
+                if (posicionProfesion != -1) {
+                    profesion.setSelection(posicionProfesion)
+                }
+
+                acepta_terminos.isChecked = ultimoContacto.acepta_terminos == true
+            }
+        }
 
 
 
