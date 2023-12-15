@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val nombreApellido = findViewById<EditText>(R.id.nombreEdit)
         val dni = findViewById<EditText>(R.id.dniEdit)
         val sexo = findViewById<RadioGroup>(R.id.radioGroup)
+        var sexoSeleccionado = ""
         val fecha_nacimiento = findViewById<EditText>(R.id.datePicker)
         val correo = findViewById<EditText>(R.id.emailEdit)
         val profesion = findViewById<Spinner>(R.id.spinner)
@@ -113,16 +114,28 @@ class MainActivity : AppCompatActivity() {
             var nombre = partes[0]
             var apellidos = partes.subList(1, partes.size).joinToString(" ")
 
+            // Obtener sexo del radioGroup
+            val selectedSex = sexo.checkedRadioButtonId
+            if (selectedSex == R.id.radioHombre){
+                sexoSeleccionado = "Hombre"
+            } else if (selectedSex == R.id.radioMujer){
+                sexoSeleccionado = "Mujer"
+            } else {
+                sexoSeleccionado = "Otro"
+            }
+
+
             val contacto = Contacto(
                 nombre,
                 apellidos,
                 dni.text.toString(),
-                sexo.checkedRadioButtonId,
+                sexoSeleccionado,
                 fecha_nacimiento.text.toString(),
                 correo.text.toString(),
                 profesion.selectedItem.toString(),
                 acepta_terminos.isChecked
             )
+
             contactoDBHelper.saveContact(contacto)
         }
 

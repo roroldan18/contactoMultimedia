@@ -6,27 +6,31 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.practica4.Entity.Contacto
 
-
-class ContactoDBHelper: SQLiteOpenHelper {
+class ContactoDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
-        private val DATABASE_VERSION = 1
-        private val DATABASE_NAME = "contactos.db"
-    }
-
-    constructor(context: Context): super(context, DATABASE_NAME, null, DATABASE_VERSION) {
+        private const val DATABASE_VERSION = 1
+        private const val DATABASE_NAME = "contactos.db"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL("CREATE TABLE contactos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, apellidos TEXT, dni TEXT, sexo TEXT, fecha_nacimiento TEXT, correo TEXT, profesion TEXT, acepta_terminos INTEGER)")
-
+        db?.execSQL(
+            "CREATE TABLE contactos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, apellidos TEXT, " +
+                    "dni TEXT, sexo TEXT, fecha_nacimiento TEXT, correo TEXT, profesion TEXT, acepta_terminos INTEGER)"
+        )
     }
 
-    fun saveContact(db: SQLiteDatabase?, contacto: Contacto) {
-        db?.insert("contactos", null, toContentValues(contacto))
-
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS contactos")
+        onCreate(db)
     }
 
-    fun toContentValues(contacto: Contacto): ContentValues {
+    fun saveContact(contacto: Contacto) {
+        val db = writableDatabase
+        db.insert("contactos", null, toContentValues(contacto))
+        db.close()
+    }
+
+    private fun toContentValues(contacto: Contacto): ContentValues {
         val values = ContentValues()
 
         values.put("nombre", contacto.nombre)
@@ -41,14 +45,10 @@ class ContactoDBHelper: SQLiteOpenHelper {
         return values
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE contactos")
-        onCreate(db)
-    }
-
-    fun getContactos(db: SQLiteDatabase?): ArrayList<Contacto> {
+    fun getContactos(): ArrayList<Contacto> {
         val contactos = ArrayList<Contacto>()
-        val cursor = db?.rawQuery("SELECT * FROM contactos", null)
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM contactos", null)
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -68,6 +68,9 @@ class ContactoDBHelper: SQLiteOpenHelper {
                 } while (cursor.moveToNext())
             }
         }
+
+        cursor.close()
+        db.close()
 
         return contactos
     }
